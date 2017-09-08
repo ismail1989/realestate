@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OraRealEstate</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/0.5.0/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/0.5.0/sweet-alert.css"/>
+    <!--Start of Zendesk Chat Script-->
+    <script type="text/javascript">
+    window.$zopim||(function(d,s){var z=$zopim=function(c){
+    z._.push(c)},$=z.s=
+    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+    $.src='https://v2.zopim.com/?52BFDmPeF6dUOdFMKVXg0Ul5GW7UJ5fZ';z.t=+new Date;$.
+    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+    </script>
+    <!--End of Zendesk Chat Script-->
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+  <%= render 'shared/navbar' %>
+  	<div class="container">
+      <% unless flash.empty? %>
+       <script type="text/javascript">
+          <% flash.each do |f| %>
+          <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+           toastr['<%= type %>']('<%= f[1] %>');
+           <% end %>
+           </script>
+      <% end %>
+    </div>
+
+   <%= yield %>
+  <% if user_signed_in?%>
+    <%= render 'shared/admin_footer' %>
+  <%else%>
+    <%= render 'shared/footer' %>
+  <%end%>
+  </body>
+</html>

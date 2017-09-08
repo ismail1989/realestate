@@ -1,0 +1,211 @@
+<script type="text/javascript">
+  "use strict";
+
+window.initMap = function() {
+  var customMapType = new google.maps.StyledMapType([
+    {
+      stylers: [
+        {'saturation': -100},
+        {'lightness': 50},
+        {'visibility': 'simplified'}
+      ]
+    },
+    {
+      elementType: 'labels',
+      stylers: [{visibility: 'on'}]
+    },
+    {
+      featureType: 'road',
+      stylers: [{color: '#bbb'}]
+    }
+  ], {
+    name: '<%= @property.country %>'
+  });
+
+  var image = new google.maps.MarkerImage(
+    '<%= image_path "gmap-pin.png" %>',
+    new google.maps.Size(48,54),
+    new google.maps.Point(0,0),
+    new google.maps.Point(24,54)
+  );
+
+  var customMapTypeId = 'custom_style';
+
+  var location = {lat: <%= @property.latitude%>, lng: <%= @property.longitude%>};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 13,
+    scrollwheel: true,
+    streetViewControl: true,
+    mapTypeControl: true,
+    center: location,
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
+    }
+  });
+
+  var contentString = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h1 id="firstHeading" class="firstHeading">Bengaluru</h1>'+
+    '<div id="bodyContent">'+
+    '<p>#2, Anniah Reddy Layout, <br>JP nagar, 6th Phase, <br> Bengaluru, Karnataka</p>'+
+    '</div>'+
+    '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString,
+    maxWidth: 300
+  });
+
+  var marker = new google.maps.Marker({
+    map: map,
+    clickable: true,
+    icon: image,
+    title: 'example',
+    position: location
+  });
+
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+  map.mapTypes.set(customMapTypeId, customMapType);
+  map.setMapTypeId(customMapTypeId);
+}
+</script>
+
+<style type="text/css">
+  .sidebar-nav-fixed {
+    width:100%;
+  }
+  .form-horizontal .control-label{  
+    text-align: right !important;
+    float: right;
+  }
+  .thumbnail > img{max-width: 100%;
+    min-width: 139px !important;
+    min-height: 134px !important;;}
+</style>
+
+<div class="container" style="margin-top:0;">
+  <div class="container-fluid">
+
+	  <div class="row" style="margin-top: 80px;">
+	  	
+<style type="text/css">
+  .owl-item{
+    width: 590px!important;
+    height: 320px!important;
+  }
+</style>
+			<div class="col-lg-8" dir="rtl">
+			<% if params[:country].present? || params[:city].present? || params[:price_range_min].present? || params[:price_range_max].present? || params[:province].present? || params[:holding_type].present? %>
+				<hgroup class="mb20">
+					<h1>Search Results</h1>
+					<h2 class="lead"><strong class="text-danger"></strong>Property search results match</h2>
+				</hgroup>
+			<%end%>
+						<div class="jumbotron">
+              <h4>إسم المشروع <%= @property.project_name%>  / رمز المشروع <small> (<%= @property.project_code%>)</small></h4>
+              <h4>إسم العقار <%= @property.property_name%>  / رمز العقار <small> (<%= @property.property_code%>)</small></h4><br>
+              <div class="owl-carousel" dir="ltr">
+								<% @property.gallery_photos.each do |file|%>
+                <%= image_tag file.url, width: '100%;'%>
+                <%end%>
+              </div><br><br>
+							
+							<div class="col-xs-12">
+								<ul class="meta-search">
+                  <p><b>الدولة</b> <%= @property.country%><span style="float: left;"><b>السعر :</b> <%= @property.price%> USD</span></p>
+									<p><b>المنطقة/ المدينة</b> <%= @property.province%>/ <%= @property.city%></p>
+									<p><b>العنوان :</b> <%= @property.address%></p>
+                  <p style="display: block;float: right;"><b>لمحة عن العقار</b><%= @property.description.html_safe%></p>
+                  <br><Br>
+									<p><b>الميزات و الخصائص:</b> <% @property.facilities.each do |facility|%>
+                    <span class="badge"><%= facility%></span>
+                    <%end%>
+                  </p>
+                  <br>
+								</ul>
+                <div id="map" class="map height-400"></div>
+                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyPLpyacUIlXgGXyNfg6KAN4v_swAwZvQ&amp;callback=initMap" async defer></script>
+							</div>
+							<span class="clearfix borda"></span>
+						</div>
+
+            <h2 style="color:#fff;">عقارات مشابهة</h2>
+            <%@properties.each do |property|%>
+            <article class="search-result row" style="background: rgb(238, 238, 238);">
+              <div class="col-xs-12 col-sm-12 col-md-3">
+                <a href="<%= property_details_path(property_id: property) %>" class="thumbnail" style="padding:0;border: 1px solid #ddd;"><%= image_tag property.main_photo_url if property.main_photo?%></a>
+              </div>
+              <a href="<%= property_details_path(property_id: property) %>" style="color: #3d3333">
+              <div class="col-xs-12 col-sm-12 col-md-9">
+                <ul class="meta-search">
+                  <p><%= property.property_name%><small> (<%= property.property_code%>)</small></p>
+                  <p><b>المنطقة /المدينة:</b> <%= property.province%>|<%= property.city%></p>
+                  <p><b>العنوان :</b> <%= property.address%></p>
+                  <p><b>نوع القعار:</b> <%= property.holding_type%> <b style="float: right;">السعر: <%= property.price%> USD</b></p>
+                </ul>
+              </div>
+              </a>
+              <span class="clearfix borda"></span>
+            </article>
+           
+          <!-- </section> -->
+        <%end%>
+
+        <ul class="pagination">
+        <%= paginate @properties %>
+      </ul>
+		 	</div>
+ 
+     <div class="col-lg-4" style="z-index: 1000;" dir="rtl">
+	    	<div class="well-searchbox">
+	        <%= form_tag(search_property_path, method: :get, class: 'form-horizontal', role: 'search') do%>
+            <div class="form-group">
+              <label class="col-md-4 control-label">الدولة</label>
+              <div class="col-md-8">
+              	<%= text_field_tag :country, params[:country] = "تركيا", disabled: true, class: 'form-control'%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">المدينة</label>
+              <div class="col-md-8">
+                <%= select_tag 'city', options_for_select(Property::CITY, params[:city]), include_blank: "إختر المدينة" ,  class: "select2", style: 'width:100%;' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">المنطقة</label>
+              <div class="col-md-8">
+              	<%= text_field_tag :province, params[:province], placeholder: 'المنطقة', class: 'form-control'%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">نوع العقار</label>
+              <div class="col-md-8">
+                <%= select_tag :holding_type, options_for_select(Property::HOLDINGTYPES, selected: params[:holding_type]), {class: 'form-control', include_blank: true }%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label lab">متوسط الأسعار</label>
+                  <%= text_field_tag :price_range_min, params[:price_range_min], placeholder: '0$', size: 7, class: 'webber', style:'margin-left: 15px;margin-right: 5px;'%> -
+                  <%= text_field_tag :price_range_max, params[:price_range_max], placeholder: '1000000$', size: 7, class: 'webber'%>
+            </div>
+            <div class="form-group">
+            <div class="col-sm-12">
+              <%= submit_tag 'بحث', name: nil, class: "btn btn-success", style: 'width:44.3%;float:right;'%>
+            	<%= link_to 'حذف', search_property_path, class: 'btn btn-default', style:'float:right;margin-left:10px;width:20%;'%>
+            	
+            </div>
+            </div>
+	        <%end%>
+      </div>
+    </div>
+		</div>
+	</div>
+</div>

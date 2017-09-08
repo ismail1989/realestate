@@ -1,0 +1,2 @@
+module BlogAdmin::NewsHelper
+end

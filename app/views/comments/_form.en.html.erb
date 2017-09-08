@@ -1,0 +1,30 @@
+<%= form_for @comment, remote:true do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :parent_id %>
+  <% if @blog.present?%>
+  <%= f.hidden_field :blog_id, value:  @blog.id %>
+  <%end%>
+
+  <% if params[:blog_id].present?%>
+  <%= f.hidden_field :blog_id, value: params[:blog_id] %>
+  <%end%>
+  <%#= f.hidden_field :commenter, value: current_user.email %>
+
+  <div class="form-group">
+    <label>add a comment</label>
+    <%= f.text_area :body, class: 'form-control',placeholder: 'Reply to this comment',  required: true %>
+  </div>
+
+  <%= f.submit 'comment', class: 'btn btn-primary' %>
+<% end %>

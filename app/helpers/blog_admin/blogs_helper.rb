@@ -1,0 +1,2 @@
+module BlogAdmin::BlogsHelper
+end

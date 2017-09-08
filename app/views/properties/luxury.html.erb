@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="container-fluid">
+  <h1>Luxury properties</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="well bs-component">
+        <table class="table table-striped table-bordered dt-responsive nowrap myTable">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>City</th>
+              <th>Holding type</th>
+              <th>Project name</th>
+              <th>Property name</th>
+              <th>Price</th>
+              <th>Facilities</th>
+              <th>Featured</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @luxury_flats.each do |property| %>
+              <tr>
+                <td><%= property.country %></td>
+                <td><%= property.city %></td>
+                <td><%= property.holding_type %></td>
+                <td><%= property.project_name %></td>
+                <td><%= property.property_name %></td>
+                <td><%= property.price %></td>
+                <td><%= property.facilities %></td>
+                <td><%= property.featured %></td>
+                <td><%= link_to 'Show', property %>
+                  <%= link_to 'Edit', edit_property_path(property) %>
+                  <%= link_to 'Destroy', property, data: { behavior: 'delete' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>

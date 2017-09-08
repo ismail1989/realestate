@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>OraRealEstate-Admin</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <style type="text/css">
+    .container{
+      margin-top: 0px;
+    }
+  </style>
+  <body>
+  <%= render 'shared/admin/header'%>
+  <% unless flash.empty? %>
+       <script type="text/javascript">
+          <% flash.each do |f| %>
+          <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+           toastr['<%= type %>']('<%= f[1] %>');
+           <% end %>
+           </script>
+      <% end %>
+  	<div class="jumbotron">
+		  <div class="container">
+				<%= yield %>
+		  </div>
+		</div>
+  <%= render 'shared/admin/footer'%>
+  </body>
+</html>

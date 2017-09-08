@@ -1,0 +1,3 @@
+$('#myModal').modal('hide');
+$("#blog_tags").empty()
+  .append("<%= escape_javascript(render(:partial => 'update_tags')) %>")

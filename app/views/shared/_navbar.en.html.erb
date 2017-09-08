@@ -1,0 +1,83 @@
+<style>
+    	.container > .navbar-header {margin-bottom: -90px}
+    	.navbar > .container .navbar-brand{height: 300px;margin-top: -127px;}
+    	
+    	@media only screen and (max-width: 500px){
+    	    .container > .navbar-header {margin-bottom: 0 }
+    	    .navbar > .container .navbar-brand{height: 200px;margin-top: -68px; margin-bottom: -68px;}
+    	    .mob-hide-me{display:none !important}
+    	}
+    	@media only screen and (min-width: 997px){
+        .navbar-container{
+          margin-top: 20px;
+        }
+    </style>
+
+
+<nav id="header" class="navbar navbar-fixed-top">
+  <div id="header-container" class="container navbar-container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a href="/en"><img src="<%= image_path ('logo.png') %>" id="brand" class="navbar-brand"></a> 
+      <% if user_signed_in? && current_user.role.name.include?('General Manager') %>
+        <a class="navbar-brand dash" href="<%= admin_index_path%>">Dashboard</a>
+        <%elsif user_signed_in? && current_user.role.name.include?('Property Manager')%>
+        <a class="navbar-brand dash" href="<%= property_admins_path%>">Dashboard</a>
+        <%elsif user_signed_in? &&  current_user.role.name.include?('Blog Manager')%>
+        <a class="navbar-brand dash" href="<%= blog_admin_path%>">Dashboard</a>
+        <%else%>
+        <%= nil%>
+      <%end%>
+    </div>
+
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <%if !user_signed_in?%>
+        <%= nav_link 'Home', root_path%>
+        <li class="mob-hide-me"><a>&bull;</a></li>
+        <%end%>
+        <% if !user_signed_in? %>
+          <%= nav_link 'Search property', search_property_path%>
+        <%end%>
+        <%if !user_signed_in?%>
+        <li class="mob-hide-me"><a>&bull;</a></li>
+        <%= nav_link 'Blogs', blogs_path%>
+        <li class="mob-hide-me"><a>&bull;</a></li>
+        <%= nav_link 'News', news_index_path%>
+        <li class="mob-hide-me"><a>&bull;</a></li>
+        <%end%>
+        <% if user_signed_in?%>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.role.name%> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <%= nav_link 'Settings', edit_user_registration_path %>
+            <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+          </ul>
+        </li>
+        <%else%>
+          <%= nav_link 'Login', new_user_session_path%>
+        <%end%>
+        <li class="mob-hide-me"><a>&bull;</a></li>
+        <li><% if I18n.locale == I18n.default_locale %><%= link_to "English ", { :locale=>'en' }, :data => { :turbolinks => false } %>
+            <% else %>
+              <%= link_to " ARABIC", { :locale=>'ar'}, :data => { :turbolinks => false } %>
+            <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<script>
+$(window).scroll(function() {
+    if ($(".navbar").offset().top > 50) {
+        $(".navbar-fixed-top").addClass("navbar-collapse collapse");
+    } else {
+        $(".navbar-fixed-top").removeClass("navbar-collapse collapse");
+    }
+});
+</script>

@@ -1,0 +1,2 @@
+$("#replyToComment_<%= @comment.parent_id %>").empty();
+$("#reply_<%= @comment.parent_id%>").append("<%= escape_javascript render(:partial => 'form') %>");

@@ -1,0 +1,352 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require owl.carousel
+ *= require owl.theme
+ *= require toastr
+ *= require select2
+ *= require style
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
+
+
+ @font-face {
+  font-family: "FontAwesome";
+  src: image-url('fontawesome-webfont.eot');
+  src: image-url('fontawesome-webfont.eot?#iefix') format('eot'), image-url('fontawesome-webfont.woff') format('woff'), image-url('fontawesome-webfont.ttf') format('truetype'), image-url('fontawesome-webfont.svg#FontAwesome')    format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(25, 12, 23)), to(#cbccc8)) fixed;
+
+}
+.navbar-fixed-top .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+.navbar-brand {
+  font-size: 50px;
+}
+
+.dash {
+  font-size: 15px;
+}
+.container{
+  margin-top: 100px;
+}
+
+footer{
+  margin-top: 100px;
+  padding-bottom: 0px;
+}
+
+.navbar-container {
+    padding: 20px 0 20px 0;
+    margin-top: 0;
+}
+
+.navbar.navbar-fixed-top.fixed-theme {
+    background-color: rgb(25, 12, 23);
+    box-shadow: 0 0 50px rgb(25, 12, 23);
+    border-bottom: 1px solid transparent;
+    margin-bottom: -10px;
+    -webkit-transition: border-color .2s;
+    -o-transition: border-color .2s;
+    transition: border-color .2s;
+
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+  background-color: transparent; 
+}
+
+.navbar-brand.fixed-theme {
+    font-size: 18px;
+}
+
+.navbar-container.fixed-theme {
+    padding: 0;
+}
+
+.navbar-brand.fixed-theme,
+.navbar-container.fixed-theme,
+.navbar.navbar-fixed-top.fixed-theme,
+.navbar-brand,
+.navbar-container{
+    transition: 0.8s;
+    -webkit-transition:  0.8s;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+  background-color: transparent;
+}
+ .navbar{
+ 	border-radius: 0;
+  border:0;
+ }
+
+ .custom{
+  float: right;
+  margin-top: -13px;
+  width: 20%;
+  margin-bottom: 10px;
+}
+
+ ul {
+  padding-left: 0px;
+  list-style: none;
+}
+
+
+.btn {
+  text-transform: capitalize!important;
+  }
+
+
+.jumbotron p {
+  font-size: 15px;
+}
+
+.replies {margin-left: 50px;}
+.replies .replies .replies .replies .replies {margin-left: 0;}
+
+.full {
+    width: 100%;    
+}
+.gap {
+	height: 30px;
+	width: 100%;
+	clear: both;
+	display: block;
+}
+.footer {
+	background: #212121;
+	height: auto;
+	padding-bottom: 30px;
+	position: relative;
+	width: 100%;
+	border-bottom: 1px solid #CCCCCC;
+	border-top: 1px solid #DDDDDD;
+}
+.footer p {
+	margin: 0;
+}
+.footer img {
+	max-width: 100%;
+}
+.footer h3 {
+	border-bottom: 1px solid #BAC1C8;
+	color: #54697E;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 27px;
+	padding: 40px 0 10px;
+	text-transform: uppercase;
+}
+.footer ul {
+	font-size: 13px;
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+	margin-top: 15px;
+	color: #7F8C8D;
+}
+.footer ul li a {
+	padding: 0 0 5px 0;
+}
+.footer a {
+	color: #78828D
+}
+.supportLi h4 {
+	font-size: 20px;
+	font-weight: lighter;
+	line-height: normal;
+	margin-bottom: 0 !important;
+	padding-bottom: 0;
+}
+.newsletter-box input#appendedInputButton {
+	background: #FFFFFF;
+	display: inline-block;
+	float: left;
+	height: 30px;
+	clear: both;
+	width: 100%;
+}
+.newsletter-box .btn {
+	border: medium none;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+	display: inline-block;
+	height: 40px;
+	padding: 0;
+	width: 100%;
+	color: #fff;
+}
+.newsletter-box {
+	overflow: hidden;
+}
+.bg-gray {
+	background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+	box-shadow: 0 1px 0 #B4B3B3;
+}
+.social li {
+	background: none repeat scroll 0 0 #B5B5B5;
+	border: 2px solid #B5B5B5;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	-ms-border-radius: 50%;
+	border-radius: 50%;
+	float: left;
+	height: 36px;
+	line-height: 36px;
+	margin: 0 8px 0 0;
+	padding: 0;
+	text-align: center;
+	width: 36px;
+	transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+}
+.social li:hover {
+	transform: scale(1.15) rotate(360deg);
+	-webkit-transform: scale(1.1) rotate(360deg);
+	-moz-transform: scale(1.1) rotate(360deg);
+	-ms-transform: scale(1.1) rotate(360deg);
+	-o-transform: scale(1.1) rotate(360deg);
+}
+.social li a {
+	color: #EDEFF1;
+}
+.social li:hover {
+	border: 2px solid #2c3e50;
+	background: #2c3e50;
+}
+.social li a i {
+	font-size: 16px;
+	margin: 0 0 0 5px;
+	color: #EDEFF1 !important;
+}
+.footer-bottom {
+	background: #E3E3E3;
+	border-top: 1px solid #DDDDDD;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.footer-bottom p.pull-left {
+	padding-top: 6px;
+	padding-right: 10px;
+}
+.payments {
+	font-size: 1.5em;	
+}
+
+.btn-group.dropup{
+    position:fixed;
+    left:0px;
+    bottom:0;
+}
+.row{
+      margin-left: 0px;
+    margin-right: 0px;
+}
+
+a{
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 100%;
+  -webkit-transition: color .2s;
+  -o-transition: color .2s;
+  transition: color .2s;
+  background-color: transparent;
+}
+
+.container > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-header, .container-fluid > .navbar-collapse{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.nav>li>a {
+    position: relative;
+    display: block;
+}
+
+.thumbnail{
+  border: 0;
+  padding: 10px;
+}
+
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td{
+	background: #c7c8c5;
+}
+
+.alert {
+  color: #fff;
+}
+
+.dropdown-menu > li > a{
+	color: #30252e;
+}
+
+a:hover, a:focus{
+	color:#f5f5f5;
+}
+
+.navbar-collapse.in{
+	overflow-y: inherit;
+}
+
+@media only screen and ( max-width: 500px ){
+	canvas{ display: none;}
+	#particles-js{margin-bottom: 84%;}
+}
+
+.height-400 {
+  height: 300px !important;
+}
+
+/* go2top */
+.go2top,
+.go2top:focus {
+  left: 15px;
+  bottom: 8px;
+  width: 38px;
+  height: 38px;
+  z-index: 9999;
+  line-height: 1;
+  font-size: 18px;
+  position: fixed;
+  text-align: center;
+  border-radius: 50%;
+  padding: 7px 0 0 1px;
+  background: transparent;
+  color: #1c826e;
+  border: solid 2px #1c826e; }
+  .go2top:hover,
+  .go2top:focus:hover {
+    color: #fff;
+    background: #1c826e;
+    transition-duration: 400ms;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1); }

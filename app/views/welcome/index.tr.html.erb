@@ -1,0 +1,174 @@
+<link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet">
+<style type="text/css">
+@media only screen and (min-width: 997px){
+  .container{
+    margin-top: 20px;
+  }  
+  * {font-family: 'Changa', sans-serif;}
+    	.nav > li > a{font-size: 16px;}
+}
+</style>
+
+<body style="background-color:#190c17;">
+<div id="particles-js">
+  
+</div>
+<div class="container">
+<div class="row webb">
+        <div class="col-md-12">
+            <div class="panel panel-default" style="background-color: transparent;border: none; */">
+                <div class="panel-body">
+                  <%= render 'enquiries/form'%>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <ul class="cb-slideshow">
+      <li><span>Image 01</span><div><h3>re·lax·a·tion</h3></div></li>
+      <li><span>Image 02</span><div><h3>qui·e·tude</h3></div></li>
+      <li><span>Image 03</span><div><h3>bal·ance</h3></div></li>
+      <li><span>Image 04</span><div><h3>e·qua·nim·i·ty</h3></div></li>
+      <li><span>Image 05</span><div><h3>com·po·sure</h3></div></li>
+      <li><span>Image 06</span><div><h3>se·ren·i·ty</h3></div></li>
+  </ul>
+
+<div class="container">
+<div class="container-fluid">
+
+  <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="heading">المنازل - الشقق<small style="float:right;"><%= link_to "View all Flat-Appartment", search_property_path(holding_type: "Appartment"), target: "_blank", class: 'btn btn-primary'%></small></h3>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Page Features -->
+        <div class="row text-center">
+          <%@flat_sorted.each do |property|%>
+            <div class="col-md-3 col-sm-6 hero-feature">
+              <div class="thumbnail" style="background-color: rgba(25, 12, 23, 0.91);">
+                <h5 class="text-left" style="color:#fff;"><%= property.property_name%></h5>
+                <%= image_tag property.main_photo.url%>
+                  <h5 class="text-left" style="color:#fff;"><%= property.address%></h5>
+                  <h5 class="text-left" style="color:#fff;"><%= property.province%>/<%= property.city%></h5><br>
+                  <h5 class="text-right" style="color:#fff;"><b>Price:</b> <%= property.price%></h5>
+              </div>
+            </div>
+          <%end%>
+        </div>
+        <!-- /.row -->
+
+
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="heading">Luxury-Flat<small style="float:right;"><%= link_to "View all Luxury-Flat", search_property_path(holding_type: "Luxury-Flat"), target: "_blank", class: 'btn btn-primary'%></small></h3>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Page Features -->
+        <div class="row text-center">
+          <%@luxury_sorted.each do |property|%>
+            <div class="col-md-3 col-sm-6 hero-feature">
+              <div class="thumbnail" style="background-color: rgba(25, 12, 23, 0.91);">
+                <h5 class="text-left" style="color:#fff;"><%= property.property_name%></h5>
+                <%= image_tag property.main_photo.url if property.main_photo?%>
+                  <h5 class="text-left" style="color:#fff;"><%= property.address%></h5>
+                  <h5 class="text-left" style="color:#fff;"><%= property.province%>/<%= property.city%></h5><br>
+                  <h5 class="text-right" style="color:#fff;"><b>Price:</b> <%= property.price%></h5>
+              </div>
+            </div>
+          <%end%>
+        </div>
+        <!-- /.row -->
+
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="heading">House-Villa<small style="float:right;"><%= link_to "View all House-Villa", search_property_path(holding_type: "House-Villa"), target: "_blank", class: 'btn btn-primary'%></small></h3>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Page Features -->
+        <div class="row text-center">
+          <%@house_villas.each do |property|%>
+            <div class="col-md-3 col-sm-6 hero-feature">
+              <div class="thumbnail" style="background-color: rgba(25, 12, 23, 0.91);">
+                <h5 class="text-left" style="color:#fff;"><%= property.property_name%></h5>
+                <%= image_tag property.main_photo.url%>
+                  <h5 class="text-left" style="color:#fff;"><%= property.address%></h5>
+                  <h5 class="text-left" style="color:#fff;"><%= property.province%>/<%= property.city%></h5><br>
+                  <h5 class="text-right" style="color:#fff;"><b>Price:</b> <%= property.price%></h5>
+              </div>
+            </div>
+          <%end%>
+        </div>
+        <!-- /.row -->
+
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="heading">Lands<small style="float:right;"><%= link_to "View all Lands", search_property_path(holding_type: "Lands"), target: "_blank", class: 'btn btn-primary'%></small></h3>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Page Features -->
+        <div class="row text-center">
+          <%@lands_sorted.each do |property|%>
+            <div class="col-md-3 col-sm-6 hero-feature">
+              <div class="thumbnail" style="background-color: rgba(25, 12, 23, 0.91);">
+                <h5 class="text-left" style="color:#fff;"><%= property.property_name%></h5>
+                <%= image_tag property.main_photo.url%>
+                  <h5 class="text-left" style="color:#fff;"><%= property.address%></h5>
+                  <h5 class="text-left" style="color:#fff;"><%= property.province%>/<%= property.city%></h5><br>
+                  <h5 class="text-right" style="color:#fff;"><b>Price:</b> <%= property.price%></h5>
+              </div>
+            </div>
+          <%end%>
+        </div>
+        <!-- /.row -->
+
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="heading">Other holdings<small style="float:right;"><%= link_to "View all Other holdings", search_property_path(holding_type: "Other Holding"), target: "_blank", class: 'btn btn-primary'%></small></h3>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Page Features -->
+        <div class="row text-center">
+          <%@other_holdings.each do |property|%>
+            <div class="col-md-3 col-sm-6 hero-feature">
+              <div class="thumbnail" style="background-color: rgba(25, 12, 23, 0.91);">
+                <h5 class="text-left" style="color:#fff;"><%= property.property_name%></h5>
+                <%= image_tag property.main_photo.url%>
+                  <h5 class="text-left" style="color:#fff;"><%= property.address%></h5>
+                  <h5 class="text-left" style="color:#fff;"><%= property.province%>/<%= property.city%></h5><br>
+                  <h5 class="text-right" style="color:#fff;"><b>Price:</b> <%= property.price%></h5>
+              </div>
+            </div>
+          <%end%>
+        </div>
+
+    </div>
+</div>
+</body>
+<!-- js -->
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var images = <%= raw @sliders %>;
+    var random = 1 + Math.floor(Math.random() * images.length);
+
+    $('.cb-slideshow').html('<img src="' + images[random -1] + '" />');
+
+  });
+
+</script>

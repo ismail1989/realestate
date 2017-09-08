@@ -1,0 +1,12 @@
+<div class="well">
+  	<p><%= @comment.body %> &mdash;<span class="text-muted"><%= @comment.root? ? "" : "Replied by" %><strong style="color:#0d87e9;font-weight:400;"><%= @comment.commenter %></strong> on<%= l(@comment.created_at, format: '%B, %d %Y %H:%M:%S') %></span></p>
+
+	<% from_reply_form ||= nil %>
+	<% unless from_reply_form %>
+	  <% if @comment.leaf? %>
+	    <small class="text-muted">لا يوجد ردود على هذا التعليق بعد  .... أضف ردك الآن</small>
+	  <% end %>
+	  <p><%= link_to 'reply', new_comment_path(@comment.id, blog_id: @comment.blog_id), id: "replyToComment_#{@comment.id}", remote: true %></p>
+	<% end %>
+	<div id="reply_<%= @comment.id%>"></div>
+</div>

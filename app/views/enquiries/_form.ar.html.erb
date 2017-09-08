@@ -1,0 +1,39 @@
+<!-- <style type="text/css">
+	label{
+		color: #fff;
+	}
+	.form-control{
+		background-color: rgba(255, 255, 255, 0);
+	}
+	.form-control::-webkit-input-placeholder { color: white; }
+	.form-control:-moz-placeholder { color: white; }
+	.form-control::-moz-placeholder { color: white; }
+	.form-control:-ms-input-placeholder { color: white; }
+	.form-control::-ms-input-placeholder { color: white; }
+	input{
+		color: #fff!important;
+	}
+</style> -->
+<link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet">
+<style>
+* {font-family: 'Changa', sans-serif;}
+    	.nav > li > a{font-size: 16px;}
+</style>
+<% @enquiry = Enquiry.new%>
+<div class="well bs-component">
+<%= form_for(@enquiry, remote: true) do |f|%>
+<div class="form-group">
+  <label class="control-label">الإسم الكامل</label>
+  <%= f.text_field :name, class: "form-control", placeholder: 'الإسم هنا' %>
+</div>
+
+<div class="form-group">
+  <label class="control-label">رقم الموبايل</label>
+ 	<%= f.text_field :mobile, class: "form-control", placeholder: 'الرقم هنا' %>
+</div>
+
+<div class="form-group">
+  <%= f.button 'إرسال', :class => 'btn btn-primary' %>
+</div>
+<%end%>
+</div>

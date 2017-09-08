@@ -1,0 +1,179 @@
+<div class="container">
+  <div class="container-fluid">
+    <div class="row">
+     
+        <div class="well bs-component">
+          <%= form_for @property, html: {class: 'form-horizontal'} do |f| %>
+          <%= render 'errors'%>
+          <fieldset>
+          <%if @property.id.present?%>
+          <legend>Edit Property<%= link_to 'Back', property_admins_path, class: 'btn btn-success custom' %></legend>
+          <%else%>
+          <legend>New Property<%= link_to 'Back', property_admins_path, class: 'btn btn-success custom' %></legend>
+          <%end%>
+           <div class="col-lg-12">
+            <div class="col-lg-6">
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Country</label>
+              <div class="col-sm-8">
+                <%= f.text_field :country, class: 'form-control', placeholder: 'Turkey', value: 'Turkey'%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">City</label>
+              <div class="col-sm-8">
+                <%= f.select :city, Property::CITY, { include_blank: "Select city" }, { class: "select2", :required => true, style: 'width:100%;'} %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Province</label>
+              <div class="col-sm-8">
+                <%= f.text_field :province, class: 'form-control', placeholder: 'Province', autofocus: true%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Address</label>
+              <div class="col-sm-8">
+                <%= f.text_area :address, class: 'form-control', placeholder: 'Address', autofocus: true%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Holding type</label>
+              <div class="col-sm-8">
+                <%= f.select :holding_type, Property::HOLDINGTYPES, { include_blank: "Select holding type" }, { class: "select2", :required => true, style: 'width:100%;'} %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Project Name</label>
+              <div class="col-sm-8">
+                <%= f.text_field :project_name, class: 'form-control', placeholder: 'Project name', autofocus: true%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Project Code</label>
+              <div class="col-sm-8">
+                <%= f.text_field :project_code, class: 'form-control', placeholder: 'Project code', autofocus: true%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Property Name</label>
+              <div class="col-sm-8">
+                <%= f.text_field :property_name, class: 'form-control', placeholder: 'Property name', autofocus: true%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Property Code</label>
+              <div class="col-sm-8">
+                <%= f.text_field :property_code, class: 'form-control', placeholder: 'Property code', autofocus: true%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Latitude</label>
+              <div class="col-sm-8">
+                <%= f.text_field :latitude, class: 'form-control', placeholder: 'Latitude', autofocus: true%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Longitude</label>
+              <div class="col-sm-8">
+                <%= f.text_field :longitude, class: 'form-control', placeholder: 'Longitude', autofocus: true%>
+              </div>
+            </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Property main photo</label>
+              <div class="col-sm-8">
+                <%= f.file_field :main_photo, class: 'form-control', id: :property_main_photo %>
+                <%= image_tag(@property.main_photo_url(:thumb)) if @property.main_photo? %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Property cover photo</label>
+              <div class="col-sm-8">
+                <%= f.file_field :cover_photo, class: 'form-control', id: :property_cover_photo %>
+                <%= image_tag(@property.cover_photo_url(:thumb)) if @property.cover_photo? %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Property galleries photo</label>
+              <div class="col-sm-8">
+                <%= f.file_field :gallery_photos, class: 'form-control', id: :property_galery_photos, multiple: true %>
+                <%@property.gallery_photos.each do |file| %>
+                <%= image_tag(file.url(:thumb)) if file.url %>
+                <%end%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Floor plan photos</label>
+              <div class="col-sm-8">
+                <%= f.file_field :floor_plan_photos, class: 'form-control', id: :property_floor_plan_photos, multiple: true %>
+                <%@property.floor_plan_photos.each do |file| %>
+                <%= image_tag(file.url(:thumb)) if file.url %>
+                <%end%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Price</label>
+              <div class="col-sm-8">
+                <%= f.text_field :price, class: 'form-control', placeholder: 'Price', autofocus: true%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Facilties</label>
+              <div class="col-sm-8">
+                <%= f.select :facilities, Property::SPECIALTIES, { prompt: "Select holding type" , selected: @property.facilities}, { class: 'select2', :required => true, style: 'width:100%;', multiple: true} %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Featured</label>
+              <div class="col-sm-2">
+                <%= f.check_box :featured, id: :property_featured %>
+              </div>
+            </div>
+
+          </div>
+
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Property Description</label>
+                <div class="col-sm-10">
+                <%= f.cktext_area :description, class: 'form-control', placeholder: 'Property description', autofocus: true%>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="actions">
+              <%= f.button :class => "btn btn-primary", style: 'width:33%;float:right;', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Please wait...."} %>
+            </div>
+
+            
+            </fieldset>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

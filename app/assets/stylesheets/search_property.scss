@@ -1,0 +1,201 @@
+// Place all the styles related to the SearchProperty controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.search-background img {
+  width: 100%;
+}
+h2{
+  margin-top: 0px!important;
+  margin-bottom: 0px!important;
+}
+
+div.col-lg-8::-webkit-scrollbar {
+  width: 10px;
+}
+div.col-lg-8::-webkit-scrollbar-track {
+  background-color: rgb(87, 79, 84);
+  border-left: 1px solid #ccc;
+  border-radius: 5px;
+}
+div.col-lg-8::-webkit-scrollbar-thumb {
+  background-color: rgb(59, 48, 56);
+  border-radius: 5px;
+}
+div.col-lg-8::-webkit-scrollbar-thumb:hover {
+  background-color: #3a3038;
+}
+
+@media only screen and (max-width: 768px) and (min-width: 600px){
+  .well-searchbox {
+  min-height: 20px;
+  padding: 19px;
+  /* position: absolute;*/
+  z-index: 80;
+  background: rgba(47, 50, 128, 0.68);
+  margin-bottom: 20px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  }
+  .webber{
+    height: 34px;
+    padding: 6px 7px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 36.5%;
+  }
+}
+@media only screen and (max-width: 650px) and (min-width: 510px){
+  .webber{
+    height: 34px;
+    padding: 6px 7px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 31%;
+  }
+}
+
+@media only screen and (max-width: 510px) and (min-width: 400px){
+  .webber{
+    height: 34px;
+    padding: 6px 7px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 24%;
+  }
+}
+
+@media only screen and (max-width: 400px) and (min-width: 320px){
+  .webber{
+    height: 34px;
+    padding: 6px 7px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 26%;
+  }
+  .lab{
+    width: 60px;
+  }
+}
+@media only screen and (min-width: 997px){
+ .well-searchbox {
+  min-height: 20px;
+  padding: 19px;
+  /* position: absolute;*/
+  z-index: 80;
+  background: rgba(47, 50, 128, 0.68);
+  margin-bottom: 20px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+}
+@media only screen and (max-width: 996px) and (min-width: 769px){
+  .well-searchbox {
+  min-height: 20px;
+  padding: 19px;
+  /* position: absolute;*/
+  z-index: 80;
+  background: rgba(47, 50, 128, 0.68);
+  margin-bottom: 20px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.webber{
+    height: 34px;
+    padding: 6px 7px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 38%;
+  }
+}
+
+
+@media only screen and (max-width: 1366px) and (min-width: 997px){
+  .well-searchbox {
+  min-height: 20px;
+  padding: 19px;
+  /* position: absolute; */
+  z-index: 80;
+  background: rgba(47, 50, 128, 0.68);
+  margin-bottom: 20px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.webber{
+    height: 34px;
+    padding: 6px 7px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 26%;
+  }
+}
+
+@media only screen and (max-width: 600px) and (min-width: 328px){
+  .well-searchbox {
+  min-height: 20px;
+  padding: 19px;
+  /* position: absolute;*/
+  z-index: 80;
+  background: rgba(47, 50, 128, 0.68);
+  margin-bottom: 20px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+}
+
+
+.well-searchbox label {
+  color: #fff;
+}
+hgroup { padding-left: 15px; }
+hgroup h2.lead { color: #2a3644; margin: 0; padding-bottom: 10px; }
+
+.search-result .thumbnail { border-radius: 0 !important; }
+.search-result { margin-top: 20px; padding-top: 10px; border: 1px solid #9E9E9E; }
+.search-result .col-md-2 { border-right: 1px dotted #ccc; min-height: 140px; }
+.search-result ul { padding-left: 0 !important; list-style: none;  }
+.search-result ul li { font: 400 normal .85em "Roboto",Arial,Verdana,sans-serif;  line-height: 30px; }
+.search-result ul li i { padding-right: 5px; }
+.search-result .col-md-7 { position: relative; }
+.search-result h3 { font: 500 normal 1.375em "Roboto",Arial,Verdana,sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
+.search-result h3 > a, .search-result i { color: #248dc1 !important; }
+.search-result p { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; } 
+.search-result span.plus { position: absolute; right: 0; top: 126px; }
+.search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
+.search-result span.plus a:hover { background-color: #414141; }
+.search-result span.plus a i { color: #fff !important; }
+.search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }

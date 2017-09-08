@@ -1,0 +1,93 @@
+<div class="container">
+<div class="container-fluid">
+        <div class="row">
+            
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+                <h3 style="color:#fff"><%= @blog.title%></h3>
+
+                <!-- Author -->
+                <p class="lead" style="color:#fff">
+                  <%= @blog.subtitle%>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p style="color:#fff"><span class="glyphicon glyphicon-time"></span> Posted on <%= @blog.created_at%></p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                <%= image_tag @blog.blog_image, style: 'width: 100%;height: 400px;border-radius: 10.5px;'%>
+
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead"><%= @blog.body.html_safe%></p>
+                <p><b>الوسوم </b><span><%= raw @blog.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></span>
+                    <span style="float:right;"><b>Share: </b>
+                      <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>
+                      <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                      <i class="fa fa-google-plus-square fa-lg" aria-hidden="true"></i></span></p>
+                <hr>
+                <!-- Blog Comments -->
+
+                <!-- Comments Form -->
+                
+                <div class="well">
+                  <%= render '/comments/form'%>
+                </div>
+
+                <hr>
+
+                <div id="comments_new">
+                <!-- Posted Comments -->
+                  
+                </div>
+                <%= comments_tree_for @comments %>
+            </div>
+             <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+                <!-- Blog Categories Well -->
+                <div class="well">
+                    <h4>Recent Blogs</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="list-unstyled">
+                              <%Blog.all.each do |blog|%>
+                                <li><a href="/blogs/<%= blog.id%>"  style="color: #204621;text-decoration: none;font-size: 15px;"><%= blog.title%></a>
+                                </li>
+                              <%end%>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <div class="well">
+                  <h4>Tags</h4>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div id="tag_cloud">
+                          <% tag_cloud Blog.tag_counts, %w[s m l] do |tag, css_class| %>
+                            <ul class="list-unstyled">
+                              <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+                            </ul>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+           
+
+        </div>
+
+    </div>
+</div>
+    <!-- /.container

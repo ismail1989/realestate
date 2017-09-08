@@ -1,0 +1,1247 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'SQL_ASCII';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO ubuntu;
+
+--
+-- Name: blogs; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE blogs (
+    id bigint NOT NULL,
+    title character varying,
+    subtitle character varying,
+    blog_image character varying,
+    body character varying,
+    tag_list character varying,
+    share character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
+);
+
+
+ALTER TABLE public.blogs OWNER TO ubuntu;
+
+--
+-- Name: blogs_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE blogs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blogs_id_seq OWNER TO ubuntu;
+
+--
+-- Name: blogs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE blogs_id_seq OWNED BY blogs.id;
+
+
+--
+-- Name: ckeditor_assets; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE ckeditor_assets (
+    id bigint NOT NULL,
+    data_file_name character varying NOT NULL,
+    data_content_type character varying,
+    data_file_size integer,
+    type character varying(30),
+    width integer,
+    height integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ckeditor_assets OWNER TO ubuntu;
+
+--
+-- Name: ckeditor_assets_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE ckeditor_assets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ckeditor_assets_id_seq OWNER TO ubuntu;
+
+--
+-- Name: ckeditor_assets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE ckeditor_assets_id_seq OWNED BY ckeditor_assets.id;
+
+
+--
+-- Name: comment_hierarchies; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE comment_hierarchies (
+    ancestor_id integer NOT NULL,
+    descendant_id integer NOT NULL,
+    generations integer NOT NULL
+);
+
+
+ALTER TABLE public.comment_hierarchies OWNER TO ubuntu;
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id bigint NOT NULL,
+    commenter character varying,
+    body character varying,
+    blog_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    parent_id integer
+);
+
+
+ALTER TABLE public.comments OWNER TO ubuntu;
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.comments_id_seq OWNER TO ubuntu;
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: enquiries; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE enquiries (
+    id bigint NOT NULL,
+    name character varying,
+    mobile character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.enquiries OWNER TO ubuntu;
+
+--
+-- Name: enquiries_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE enquiries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.enquiries_id_seq OWNER TO ubuntu;
+
+--
+-- Name: enquiries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE enquiries_id_seq OWNED BY enquiries.id;
+
+
+--
+-- Name: friendly_id_slugs; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE friendly_id_slugs (
+    id bigint NOT NULL,
+    slug character varying NOT NULL,
+    sluggable_id integer NOT NULL,
+    sluggable_type character varying(50),
+    scope character varying,
+    created_at timestamp without time zone
+);
+
+
+ALTER TABLE public.friendly_id_slugs OWNER TO ubuntu;
+
+--
+-- Name: friendly_id_slugs_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE friendly_id_slugs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.friendly_id_slugs_id_seq OWNER TO ubuntu;
+
+--
+-- Name: friendly_id_slugs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE friendly_id_slugs_id_seq OWNED BY friendly_id_slugs.id;
+
+
+--
+-- Name: news; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE news (
+    id bigint NOT NULL,
+    title character varying,
+    subtitle character varying,
+    tag_list character varying,
+    keywords character varying,
+    meta_description character varying,
+    source character varying,
+    body text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    news_image character varying
+);
+
+
+ALTER TABLE public.news OWNER TO ubuntu;
+
+--
+-- Name: news_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE news_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.news_id_seq OWNER TO ubuntu;
+
+--
+-- Name: news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE news_id_seq OWNED BY news.id;
+
+
+--
+-- Name: properties; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE properties (
+    id bigint NOT NULL,
+    country character varying,
+    province character varying,
+    city character varying,
+    address character varying,
+    holding_type character varying,
+    project_name character varying,
+    project_code character varying,
+    property_name character varying,
+    property_code character varying,
+    main_photo character varying,
+    cover_photo character varying,
+    gallery_photos character varying,
+    floor_plan_photos character varying,
+    city_location_photo character varying,
+    description character varying,
+    price character varying,
+    facilities character varying,
+    featured boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    latitude double precision,
+    longitude double precision
+);
+
+
+ALTER TABLE public.properties OWNER TO ubuntu;
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE properties_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.properties_id_seq OWNER TO ubuntu;
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE properties_id_seq OWNED BY properties.id;
+
+
+--
+-- Name: roles; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE roles (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.roles OWNER TO ubuntu;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE roles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.roles_id_seq OWNER TO ubuntu;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO ubuntu;
+
+--
+-- Name: sliders; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE sliders (
+    id bigint NOT NULL,
+    slider character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.sliders OWNER TO ubuntu;
+
+--
+-- Name: sliders_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE sliders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sliders_id_seq OWNER TO ubuntu;
+
+--
+-- Name: sliders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE sliders_id_seq OWNED BY sliders.id;
+
+
+--
+-- Name: tag_names; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE tag_names (
+    id bigint NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.tag_names OWNER TO ubuntu;
+
+--
+-- Name: tag_names_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE tag_names_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tag_names_id_seq OWNER TO ubuntu;
+
+--
+-- Name: tag_names_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE tag_names_id_seq OWNED BY tag_names.id;
+
+
+--
+-- Name: taggings; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE taggings (
+    id integer NOT NULL,
+    tag_id integer,
+    taggable_type character varying,
+    taggable_id integer,
+    tagger_type character varying,
+    tagger_id integer,
+    context character varying(128),
+    created_at timestamp without time zone
+);
+
+
+ALTER TABLE public.taggings OWNER TO ubuntu;
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE taggings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.taggings_id_seq OWNER TO ubuntu;
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE taggings_id_seq OWNED BY taggings.id;
+
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE tags (
+    id integer NOT NULL,
+    name character varying,
+    taggings_count integer DEFAULT 0
+);
+
+
+ALTER TABLE public.tags OWNER TO ubuntu;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tags_id_seq OWNER TO ubuntu;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE TABLE users (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying,
+    last_sign_in_ip character varying,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp without time zone,
+    role_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    is_active boolean
+);
+
+
+ALTER TABLE public.users OWNER TO ubuntu;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: ubuntu
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO ubuntu;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ubuntu
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY blogs ALTER COLUMN id SET DEFAULT nextval('blogs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY ckeditor_assets ALTER COLUMN id SET DEFAULT nextval('ckeditor_assets_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY enquiries ALTER COLUMN id SET DEFAULT nextval('enquiries_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY friendly_id_slugs ALTER COLUMN id SET DEFAULT nextval('friendly_id_slugs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY properties ALTER COLUMN id SET DEFAULT nextval('properties_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY sliders ALTER COLUMN id SET DEFAULT nextval('sliders_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY tag_names ALTER COLUMN id SET DEFAULT nextval('tag_names_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: ubuntu
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2017-08-18 09:05:28.668526	2017-08-18 09:05:28.668526
+\.
+
+
+--
+-- Data for Name: blogs; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY blogs (id, title, subtitle, blog_image, body, tag_list, share, created_at, updated_at, slug) FROM stdin;
+1	 ارتفاع مؤشر العقارات المؤجرة في تركيا بنسبة 0.89 بالمئة	العقارات في تركيا	Beachfront-Estate-Maui_1.jpg	<p>تم إصدار النسخة الأخيرة من تقرير مؤشر أسعار العقارات التي يتم تأجيرها في تركيا والمنظم كل من طرف جمعية غيودر وريدن الدولية وتم بناءاً على ذلك الإعلان عن نتائج المؤشر للفترة الماضية.</p>\r\n\r\n<p>ويبين التقرير الذي شمل 68 ولاية تركية، بأن سعر مؤشر العقارات المؤجرة في تركيا قد زاد بنسبة 0.89 بالمئة مقارنةً مع الشهر الماضي، وبينما زادت هذه النسبة ب 3.95 بالمئة مقارنةً مع نفس الفترة من العام الماضي.</p>\r\n\r\n<p>واحتلت ولاية بورصا التركية المرتبة الأولى على صعيد البلاد من حيث زيادة سعر المتر المربع الواحد في العقارات من ناحية التأجير، حيث زادت نسبة المؤشر في بورصا بنسبة 2.42 بالمئة في شهر واحد فقط.</p>\r\n\r\n<p>ويشير التقرير إلى أن المدن التي شهدت أكثر نسبة في مؤشرات أسعارالعقارات من ناحية الشراء على صعيد تركيا والتي تقوم بتلافي أسعارها في أقصر مدة ممكنة هي كل من مدن أيدن وفان وبيلاجيك، وذلك بسبب انخفاض أسعار العقارات فيها.</p>\r\n\r\n<p>وتشيرالبيانات، إلى أن مبيعات العقارات للأجانب فى تركيا سجلت ارتفاعًا في شهر حزيران الماضي بنسبة 24.8% مقارنةً مع الشهر نفسه من عام 2016، ووصل &nbsp;العدد الإجمالى للمبيعات الى &nbsp;1926 عقار.</p>\r\n\r\n<p>وتصدرت إسطنبول قائمة أكثر المدن التركية بيعًا للعقارات للأجانب فى حزيران الماضي، حيث بلغ عدد العقارات المبيعة 903 عقارات، تلتها أنطاليا بواقع 408 عقار، ثم بورصا بواقع 93 عقار، ثم آيدن بواقع 77 عقار، ثم العاصمة أنقرة بواقع 68 عقار، ثم موغلا بواقع 60 عقار.</p>\r\n	\N	\N	2017-08-22 14:42:01.875454	2017-08-23 07:22:09.996661	0-89
+\.
+
+
+--
+-- Name: blogs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('blogs_id_seq', 2, true);
+
+
+--
+-- Data for Name: ckeditor_assets; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY ckeditor_assets (id, data_file_name, data_content_type, data_file_size, type, width, height, created_at, updated_at) FROM stdin;
+1	airport.jpg	image/jpeg	68715	Ckeditor::Picture	876	493	2017-08-23 09:17:00.516735	2017-08-23 09:17:00.516735
+\.
+
+
+--
+-- Name: ckeditor_assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('ckeditor_assets_id_seq', 1, true);
+
+
+--
+-- Data for Name: comment_hierarchies; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY comment_hierarchies (ancestor_id, descendant_id, generations) FROM stdin;
+1	1	0
+\.
+
+
+--
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY comments (id, commenter, body, blog_id, created_at, updated_at, parent_id) FROM stdin;
+1	\N	جميل	1	2017-08-23 08:02:15.850251	2017-08-23 08:02:15.850251	\N
+\.
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('comments_id_seq', 1, true);
+
+
+--
+-- Data for Name: enquiries; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY enquiries (id, name, mobile, created_at, updated_at) FROM stdin;
+1	اسماعيل ع	022522252	2017-08-22 11:26:36.358773	2017-08-22 11:26:36.358773
+2	اسماعيل ع	022522252	2017-08-22 11:26:40.728462	2017-08-22 11:26:40.728462
+3	د أحمد	123456789	2017-08-23 08:13:28.806898	2017-08-23 08:13:28.806898
+\.
+
+
+--
+-- Name: enquiries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('enquiries_id_seq', 3, true);
+
+
+--
+-- Data for Name: friendly_id_slugs; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY friendly_id_slugs (id, slug, sluggable_id, sluggable_type, scope, created_at) FROM stdin;
+1	0-89	1	Blog	\N	2017-08-22 14:42:01.918886
+\.
+
+
+--
+-- Name: friendly_id_slugs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('friendly_id_slugs_id_seq', 2, true);
+
+
+--
+-- Data for Name: news; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY news (id, title, subtitle, tag_list, keywords, meta_description, source, body, created_at, updated_at, news_image) FROM stdin;
+2	مطار أتاتورك سيتحول إلى مركز للمعارض	مطار أتاتورك سيتحول إلى مركز للمعارض مع افتتاح المطار الثالث	أخبار	أخبار تركيا		تركيا الآن	<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>أعلن وزير النقل والاتصالات والملاحة البحرية أحمد أرسلان، أنه مع افتتاح المطار الثالث في مدينة إسطنبول، لن تعود هناك حاجة لمطار أتاتورك الدولي.</p>\r\n\r\n<p>وأوضح أرسلان، أن كلا من المطار الثالث، وأتاتورك الددولي، يستخدمان نفس الطرق الجوي، وبالتالي ليس هناك إمكانية لتشغيل المطارين بنفس الوقت، فضلا عن أنه بوجود مطار يستوعب 200 مليون مسافر لن يبقى حاجة لتغشغيل مطار أتاتورك</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>وأشار أرسلان إلى أنه سيُعاد تنظيم مطار أتاتورك، مضيفا أنه لن يُعاد بنائه بأي شكل من الأشكال ولن يصبح مركزا للتسوق أو مركز سكني، بل سيتم تحويله ليصبح مركزا للمعارض.</p>\r\n\r\n<p>وأضاف أرسلان قائلا &ldquo;نتيجة مباحثاتنا مع رئيس الجمهورية ورئيس الوزراء، طلبا منا تحويل مطار أتاتورك إلى مكان للترفيه، بحيث يمكن فيه هبوط طائرات التدريب الصغيرة، لكن الأهم من ذلك لدينا هنا مباني كثيرة، ونريدها أن تواصل تقديم خدمات للبلاد كمركز للمعارض&rdquo;.</p>\r\n\r\n<p>وكان الوزير أرسلان قد صرح قبل عدة أيام، أن 57 بالمئة من أعمال بناء المطار الثالث انتهت، وأن القسم الأول منه سيدخل حيز الخدمة في 29 أكتوبر/ تشرين الأول من العام القادم.</p>\r\n\r\n<p>تجدر الإشارة إلى أن المرحلة الأولى من المطار تنتهي العام المقبل، بقدرة استيعابية تصل إلى 90 مليون مسافر سنويًا، كما سيوفر 100 ألف فرصة عمل، ومن المنتظر أن تصل فرص العمل المتوافرة في المطار إلى 225 ألفا مع حلول 2025، وسيسهم بنسبة 4.9 في المئة من الناتج المحلي الإجمالي للبلاد</p>\r\n	2017-08-23 09:18:14.054047	2017-08-24 07:31:37.682794	cool-architecture-houses-pools-new-on-custom-swimming-pool-apartment-comely-best-modern-houses-in-the-world-amazing-zen-house-design-beautiful-wallpapers-most-moder-nice-mjpg.jpg
+1	مطار أتاتورك سيتحول إلى مركز للمعارض	مطار أتاتورك سيتحول إلى مركز للمعارض مع افتتاح المطار الثالث	أخبار	أخبار تركيا		تركيا الآن	<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>أعلن وزير النقل والاتصالات والملاحة البحرية أحمد أرسلان، أنه مع افتتاح المطار الثالث في مدينة إسطنبول، لن تعود هناك حاجة لمطار أتاتورك الدولي.</p>\r\n\r\n<p>وأوضح أرسلان، أن كلا من المطار الثالث، وأتاتورك الددولي، يستخدمان نفس الطرق الجوي، وبالتالي ليس هناك إمكانية لتشغيل المطارين بنفس الوقت، فضلا عن أنه بوجود مطار يستوعب 200 مليون مسافر لن يبقى حاجة لتغشغيل مطار أتاتورك.</p>\r\n\r\n<p>وأشار أرسلان إلى أنه سيُعاد تنظيم مطار أتاتورك، مضيفا أنه لن يُعاد بنائه بأي شكل من الأشكال ولن يصبح مركزا للتسوق أو مركز سكني، بل سيتم تحويله ليصبح مركزا للمعارض.</p>\r\n\r\n<p>وأضاف أرسلان قائلا &ldquo;نتيجة مباحثاتنا مع رئيس الجمهورية ورئيس الوزراء، طلبا منا تحويل مطار أتاتورك إلى مكان للترفيه، بحيث يمكن فيه هبوط طائرات التدريب الصغيرة، لكن الأهم من ذلك لدينا هنا مباني كثيرة، ونريدها أن تواصل تقديم خدمات للبلاد كمركز للمعارض&rdquo;.</p>\r\n\r\n<p>وكان الوزير أرسلان قد صرح قبل عدة أيام، أن 57 بالمئة من أعمال بناء المطار الثالث انتهت، وأن القسم الأول منه سيدخل حيز الخدمة في 29 أكتوبر/ تشرين الأول من العام القادم.</p>\r\n\r\n<p>تجدر الإشارة إلى أن المرحلة الأولى من المطار تنتهي العام المقبل، بقدرة استيعابية تصل إلى 90 مليون مسافر سنويًا، كما سيوفر 100 ألف فرصة عمل، ومن المنتظر أن تصل فرص العمل المتوافرة في المطار إلى 225 ألفا مع حلول 2025، وسيسهم بنسبة 4.9 في المئة من الناتج المحلي الإجمالي للبلاد.</p>\r\n	2017-08-23 09:17:15.190658	2017-08-24 07:30:46.291589	airport.jpg
+\.
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('news_id_seq', 8, true);
+
+
+--
+-- Data for Name: properties; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY properties (id, country, province, city, address, holding_type, project_name, project_code, property_name, property_code, main_photo, cover_photo, gallery_photos, floor_plan_photos, city_location_photo, description, price, facilities, featured, created_at, updated_at, latitude, longitude) FROM stdin;
+4	تركيا	بيلك دوزو	اسطنبول	الجادة 55 , طلعت باشا , اسطنبول	House-Villa	أوزيورتلار	225	دلتا إكس	552589	gallery15.jpg	gallery15.jpg	\N	\N	\N	<p>مجمع متكامل الخدمات فكل ما تحتاجونه سيكون بين أيديكم ضمن المجمع لما يحويه من مرافق خدمية ومحلات تجارية ومقاهي.</p>\r\n	120000	["","Balcony","BBQ area","Cloths cleaning services"]	t	2017-08-23 13:19:17.008819	2017-08-27 08:19:52.789859	40.9910380999999973	28.6498144000000003
+11	تركيا	شيشلي	اسطنبول	عصمان بيه - شيشلي	Luxury-Flat	دلتا ستور	125	دلتا ستور	55488	1.2.2.2-Brookfield-1.jpg	1.2.2.2-Brookfield-1.jpg	\N	\N	\N		54555	["","Cloths cleaning services"]	f	2017-08-23 14:32:32.6742	2017-08-27 08:19:56.452688	41.0600687000000022	28.9881108999999988
+18	جورجيا	كريستوفر	النشابية	دخلة ابو احمد الفوال	Other Holding	المحبة هولدينغ	12	المحبة هولدينغ	121212	72dec3b6f52abb3cd784c037f380d549.jpg	72dec3b6f52abb3cd784c037f380d549.jpg	\N	\N	\N		120000	["","Kids Playing area","Pets Allowed"]	f	2017-08-23 14:56:41.399998	2017-08-23 14:56:41.399998	\N	\N
+12	تركيا	عينتاب	عينتاب غازي	شارع السوريين - عينتاب	House-Villa	عين التينة تاورز	54	عباسيين تاورز	45000	7e78d862-12ba-445d-b3c7-b718a92eaeb6-41.jpg	7e78d862-12ba-445d-b3c7-b718a92eaeb6-41.jpg	\N	\N	\N		80000	["","Kids Playing area","Maid Service"]	f	2017-08-23 14:35:01.006056	2017-08-27 08:19:56.953363	37.0659530000000004	37.3781099999999995
+13	تركيا	شارع اللادقية	مرسين	شارع الكورنيش الخلفي	House-Villa	بلا عنوان	54	هامان غروب	55422	Untitled-3.jpg	Untitled-3.jpg	\N	\N	\N		87444	["","BBQ area"]	f	2017-08-23 14:36:29.09149	2017-08-23 14:36:29.09149	\N	\N
+7	تركيا	فلوريا	اسطنبول	الشارع الرئيسي - فلوريا	Appartment	مجمع النجمة	12	بناء المعلمين	225856	properties2515.jpg	properties2515.jpg	\N	\N	\N		23000	["","Balcony"]	f	2017-08-23 14:15:13.671898	2017-08-27 08:19:54.814401	40.9639276999999993	28.8021162000000004
+15	تركيا	اضنة	حوش اضنة	التراسات - الحارة الجديدة	Lands	ارض استيطان	21	ارض بلا عنوان	22210	properties.jpg	properties.jpg	\N	\N	\N		12000	["","Terace","Maid Service"]	f	2017-08-23 14:41:47.239092	2017-08-23 14:41:47.239092	\N	\N
+16	تركيا	سوق العرب	صبنجة	سهل الغاب -  صبنجة	Lands	ارض زراعية	45	ارض خضراء	223110	Rancho-Santa-Fe-Luxury-Home1-e1457593015498.jpg	Rancho-Santa-Fe-Luxury-Home1-e1457593015498.jpg	\N	\N	\N		4511100	["","Private Gym"]	f	2017-08-23 14:49:18.925025	2017-08-23 14:49:18.925025	\N	\N
+5	تركيا	اسنيورت	اسطنبول	اسنيورت - اسطنبول	Lands	125	125	أرض زراعية	554878	Untitled-3.jpg	Untitled-3.jpg	\N	\N	\N		1000000	["","Terace"]	t	2017-08-23 14:00:05.664059	2017-08-27 08:19:53.422426	41.0343177000000026	28.6614809000000008
+3	Turkey	Beylik Duzu	Istanbul	332. Sk. 5A\r\nInönü Mahallesi\r\nEsenyurt	Luxury-Flat	Delta	125565	Delta Holding	5589658	House-E16-02-1150x763.jpg	House-E16-02-1150x763.jpg	["27471677-apartment-wallpapers.jpg","1208131441745982_godrej-image.jpg","airport.jpg","Beachfront-Estate-Maui_1.jpg","gallery15.jpg"]	\N	map1.jpg		45020$	["","Balcony","Terace","Central A/C \\u0026 Heating"]	t	2017-08-22 10:07:57.612365	2017-08-27 07:58:06.439117	40.9910380999999973	28.6498144000000003
+19	تركيا	طلعت باشا	İstanbul	طلعت باشا / اسطنبول	Other Holding	بلا اسم	12	يلدز تاورز	22512	cool-architecture-houses-pools-new-on-custom-swimming-pool-apartment-comely-best-modern-houses-in-the-world-amazing-zen-house-design-beautiful-wallpapers-most-moder-nice-mjpg.jpg	cool-architecture-houses-pools-new-on-custom-swimming-pool-apartment-comely-best-modern-houses-in-the-world-amazing-zen-house-design-beautiful-wallpapers-most-moder-nice-mjpg.jpg	\N	\N	\N		120000	["","BBQ area"]	f	2017-08-23 14:59:21.831734	2017-08-29 08:05:42.556687	\N	\N
+2	Turkey	Istanbul	Istanbul	332. Sk. 5A\r\nInönü Mahallesi\r\nEsenyurt	Appartment	Ozyrtlar 	5523695	X Delta	12	Beachfront-Estate-Maui_1.jpg	maxresdefault.jpg	\N	\N	\N	<p>شقة مفروشة سوبر ديلوكس مع اطلالة بحرية رائعة للبيع في اسطنبول تركيا</p>\r\n	50,500$	["","Covered Parking","No Parking","Maids Room"]	t	2017-08-22 09:48:12.611349	2017-08-27 08:19:51.913129	41.0082376000000011	28.9783588999999999
+6	تركيا	باخشاشهير	اسطنبول	القطاع التاسع -  باهشاشهير	Other Holding	مجمع الدرة	124	الوحدة العاشرة	221548	properties2215.jpg	properties2215.jpg	\N	\N	\N		54588	["","Terace","Maids Room"]	t	2017-08-23 14:12:20.804414	2017-08-27 08:19:53.984058	41.0343177000000026	28.6614809000000008
+8	تركيا	المدانية	بورصة	السوق القديم / الحمدانية	Appartment	بلاس سام	221	الوحدة الثانية	215487	properties255.jpg	properties255.jpg	\N	\N	\N		15000	["","Kids Playing area"]	f	2017-08-23 14:18:14.099955	2017-08-27 08:19:55.532962	40.1925140000000027	29.093039000000001
+9	تركيا	اسنيورت	اسطنبول	انونو محلة - اسنيورت	Luxury-Flat	هورايزن بيلدنغ	455	البلوك الاول	25663	vb560009_008.jpg	vb560009_008.jpg	\N	\N	\N		45000	["","Private Pool","View of Landmark"]	f	2017-08-23 14:23:01.404168	2017-08-27 08:19:55.758248	41.0343177000000026	28.6614809000000008
+10	تركيا	بيلك دوزو	اسطنبول	الحارة الجنوبية - بيلك دوزو	Luxury-Flat	الرابية تورز	45	الرابية هولدينغ	545875	properties2715.jpg	properties2715.jpg	\N	\N	\N		25000	["","Kids Playing area"]	f	2017-08-23 14:25:06.202806	2017-08-27 08:19:55.811736	40.9910380999999973	28.6498144000000003
+14	تركيا	عمرانية	اسطنبول	العمانية الحديثة - اسطنبول	House-Villa	عمراني	45	عمرانية تاورز	55462	properties255.jpg	properties255.jpg	\N	\N	\N		66325	["","No Parking"]	f	2017-08-23 14:38:03.084596	2017-08-27 08:19:58.149249	41.0182326999999987	29.127433400000001
+17	تركيا	عصماية	اسطنبول	عصمانية - الشارع الرئيسي	Lands	بلا اسم	45	درة تركيا	22100	Beachfront-Estate-Maui_1.jpg	Beachfront-Estate-Maui_1.jpg	\N	\N	\N		12000	["","Kids Playing area"]	f	2017-08-23 14:51:27.21437	2017-08-27 08:20:00.927258	41.0050359999999969	28.9679380000000002
+20	تركيا	اسينلر	اسطنبول	طلعت توركيش	Other Holding	بلا اسم	12	اسنلر تاورز	22112	Beachfront-Estate-Maui_1.jpg	Beachfront-Estate-Maui_1.jpg	\N	\N	\N		12000	["","Terace"]	f	2017-08-23 15:00:38.723598	2017-08-27 08:20:02.542143	41.079413300000013	28.8538545000000006
+1	Turkey	istanbul	istanbul	istanbul	Appartment	Vivanta	984832	Gaur's Home	868766	architectural-wallpaper-10.jpg	\N	["House-E16-02-1150x763.jpg","nyc-luxury-apartments-at-great-1jpg.jpg","nyc-luxury-apartments-fresh-at-custom-beatrice-apartments-penthousejpg.jpg","nyc-luxury-apartments-new-on-inspiring-och-sunroof-headerjpg.jpg","Untitled-3.jpg"]	\N	\N	<p>This is the description!</p>\r\n	45000$	["","Terace","Kids Playing area","BBQ area"]	t	2017-08-22 08:24:43.3078	2017-08-27 09:00:20.035673	41.0082376000000011	28.9783588999999999
+\.
+
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('properties_id_seq', 20, true);
+
+
+--
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY roles (id, name, created_at, updated_at) FROM stdin;
+1	General Manager	2017-08-18 09:06:17.09992	2017-08-18 09:06:17.09992
+2	Blog Manager	2017-08-18 09:06:17.10793	2017-08-18 09:06:17.10793
+3	Property Manager	2017-08-18 09:06:17.112738	2017-08-18 09:06:17.112738
+4	Employee	2017-08-18 09:06:17.117236	2017-08-18 09:06:17.117236
+\.
+
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('roles_id_seq', 4, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY schema_migrations (version) FROM stdin;
+20170730164559
+20170730191057
+20170730194048
+20170730194243
+20170730195607
+20170730202758
+20170731062849
+20170731062850
+20170731062851
+20170731062852
+20170731062853
+20170731062854
+20170731115859
+20170731115862
+20170731115863
+20170731115864
+20170731115865
+20170731115866
+20170731115867
+20170731115868
+20170818144458
+20170823092700
+20170825190342
+\.
+
+
+--
+-- Data for Name: sliders; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY sliders (id, slider, created_at, updated_at) FROM stdin;
+4	["1.jpg"]	2017-08-23 12:37:50.000572	2017-08-23 12:37:50.000572
+5	["3.jpg"]	2017-08-23 12:38:56.773132	2017-08-23 12:38:56.773132
+6	["2.jpg"]	2017-08-23 12:42:37.694997	2017-08-23 12:42:37.694997
+7	["4.jpg"]	2017-08-23 12:45:12.03481	2017-08-23 12:45:12.03481
+8	["5.jpg"]	2017-08-23 12:56:39.372481	2017-08-23 12:56:39.372481
+9	["6.jpg"]	2017-08-23 12:57:43.416152	2017-08-23 12:57:43.416152
+11	["7.jpg"]	2017-08-23 13:02:03.040823	2017-08-23 13:02:03.040823
+12	["8.jpg"]	2017-08-23 13:04:13.639667	2017-08-23 13:04:13.639667
+\.
+
+
+--
+-- Name: sliders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('sliders_id_seq', 12, true);
+
+
+--
+-- Data for Name: tag_names; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY tag_names (id, name, created_at, updated_at) FROM stdin;
+1	Villas	2017-08-23 14:36:38.86821	2017-08-23 14:36:38.86821
+2	Penthouse	2017-08-23 14:36:52.232661	2017-08-23 14:36:52.232661
+3	Current-affairs	2017-08-23 14:39:02.684736	2017-08-23 14:39:02.684736
+\.
+
+
+--
+-- Name: tag_names_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('tag_names_id_seq', 3, true);
+
+
+--
+-- Data for Name: taggings; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY taggings (id, tag_id, taggable_type, taggable_id, tagger_type, tagger_id, context, created_at) FROM stdin;
+4	4	News	1	\N	\N	tags	2017-08-24 07:30:46.428095
+5	5	News	2	\N	\N	tags	2017-08-24 07:31:15.128512
+\.
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('taggings_id_seq', 5, true);
+
+
+--
+-- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY tags (id, name, taggings_count) FROM stdin;
+2	2	0
+1	1	0
+3	3	0
+4	Current-affairs	1
+5	Villas	1
+\.
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('tags_id_seq', 5, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: ubuntu
+--
+
+COPY users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, failed_attempts, unlock_token, locked_at, role_id, created_at, updated_at, is_active) FROM stdin;
+1	gen_manager@ora.com	$2a$11$7i5DEHG9RQ5UtJuhthJwqOyu6FrbRrpKfNw6ZkwCLA35dO8NA4ro6	\N	\N	\N	8	2017-08-22 14:33:05.837339	2017-08-22 14:18:26.108876	78.164.224.218	78.164.224.218	0	\N	\N	1	2017-08-18 09:06:40.685135	2017-08-22 14:33:05.839054	t
+2	blog_manager@ora.com	$2a$11$c67LEfeiQtTmhjFf9EbqPe4UG4UxSxMYvDTwskchfonIsEnyXYd3O	\N	\N	\N	7	2017-08-24 07:29:54.384048	2017-08-23 13:09:23.624788	78.164.224.218	78.164.224.218	0	\N	\N	2	2017-08-18 09:06:40.834862	2017-08-24 07:29:54.38638	t
+3	pro_manager@ora.com	$2a$11$PNLd8.eFAXq2W.mljSqZIuLSi0/Wo0/Hr1huqUfz6GoP4XEKAYNUS	\N	\N	\N	10	2017-08-29 08:50:05.861751	2017-08-29 08:04:54.163207	78.164.224.218	78.164.224.218	0	\N	\N	3	2017-08-18 09:06:40.976725	2017-08-29 08:50:05.865	t
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ubuntu
+--
+
+SELECT pg_catalog.setval('users_id_seq', 5, true);
+
+
+--
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: blogs_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY blogs
+    ADD CONSTRAINT blogs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ckeditor_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY ckeditor_assets
+    ADD CONSTRAINT ckeditor_assets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: enquiries_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY enquiries
+    ADD CONSTRAINT enquiries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: friendly_id_slugs_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY friendly_id_slugs
+    ADD CONSTRAINT friendly_id_slugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY news
+    ADD CONSTRAINT news_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: properties_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY properties
+    ADD CONSTRAINT properties_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY roles
+    ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: sliders_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY sliders
+    ADD CONSTRAINT sliders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_names_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_names
+    ADD CONSTRAINT tag_names_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY taggings
+    ADD CONSTRAINT taggings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comment_anc_desc_udx; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE UNIQUE INDEX comment_anc_desc_udx ON comment_hierarchies USING btree (ancestor_id, descendant_id, generations);
+
+
+--
+-- Name: comment_desc_idx; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX comment_desc_idx ON comment_hierarchies USING btree (descendant_id);
+
+
+--
+-- Name: index_blogs_on_slug; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_blogs_on_slug ON blogs USING btree (slug);
+
+
+--
+-- Name: index_ckeditor_assets_on_type; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_ckeditor_assets_on_type ON ckeditor_assets USING btree (type);
+
+
+--
+-- Name: index_friendly_id_slugs_on_slug_and_sluggable_type; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_friendly_id_slugs_on_slug_and_sluggable_type ON friendly_id_slugs USING btree (slug, sluggable_type);
+
+
+--
+-- Name: index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope ON friendly_id_slugs USING btree (slug, sluggable_type, scope);
+
+
+--
+-- Name: index_friendly_id_slugs_on_sluggable_id; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_friendly_id_slugs_on_sluggable_id ON friendly_id_slugs USING btree (sluggable_id);
+
+
+--
+-- Name: index_friendly_id_slugs_on_sluggable_type; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON friendly_id_slugs USING btree (sluggable_type);
+
+
+--
+-- Name: index_taggings_on_context; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_context ON taggings USING btree (context);
+
+
+--
+-- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_tag_id ON taggings USING btree (tag_id);
+
+
+--
+-- Name: index_taggings_on_taggable_id; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_taggable_id ON taggings USING btree (taggable_id);
+
+
+--
+-- Name: index_taggings_on_taggable_id_and_taggable_type_and_context; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_taggable_id_and_taggable_type_and_context ON taggings USING btree (taggable_id, taggable_type, context);
+
+
+--
+-- Name: index_taggings_on_taggable_type; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_taggable_type ON taggings USING btree (taggable_type);
+
+
+--
+-- Name: index_taggings_on_tagger_id; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_tagger_id ON taggings USING btree (tagger_id);
+
+
+--
+-- Name: index_taggings_on_tagger_id_and_tagger_type; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_tagger_id_and_tagger_type ON taggings USING btree (tagger_id, tagger_type);
+
+
+--
+-- Name: index_tags_on_name; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_tags_on_name ON tags USING btree (name);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: taggings_idx; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, taggable_type, context, tagger_id, tagger_type);
+
+
+--
+-- Name: taggings_idy; Type: INDEX; Schema: public; Owner: ubuntu; Tablespace: 
+--
+
+CREATE INDEX taggings_idy ON taggings USING btree (taggable_id, taggable_type, tagger_id, context);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

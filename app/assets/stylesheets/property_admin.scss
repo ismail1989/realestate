@@ -1,0 +1,42 @@
+// Place all the styles related to the PropertyAdmin controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.panel_override {
+    background-color: rgba(40, 108, 140, 0.34)!important; 
+  }
+  .panel-primary{
+  	border-color: rgba(40, 108, 140, 0.34);
+  }
+  .h1-class {
+    font-size: 60px;
+    margin-bottom:-10px;
+    margin-top: 30px;
+  }
+  .value-class {
+    float: left;
+    color: #000;
+    margin-left: 9px;
+    margin-top: -10px;
+    font-size: 2rem;
+  }
+  .list-group-item{
+    padding:5px;
+  }
+  .h4-class{
+    font-size: 30px;
+    margin-bottom:-10px;
+  }
+  .list-class{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20.5px;
+    padding-top: 0px;
+  }
+  .div-count{
+    float: right;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  .panel-default > .panel-heading{
+    background-color: rgba(40, 108, 140, 0.34);
+  }

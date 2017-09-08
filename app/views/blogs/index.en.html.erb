@@ -1,0 +1,87 @@
+<style>
+    b{font-weight: 100;}
+    * {font-family: 'Changa', sans-serif;}
+    p{font-size: 16px;color: #fff;}
+    .pull-left{color: #333333;}
+</style>
+<div class="container">
+<div class="container-fluid">
+
+        <div class="row">
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+            <%@blogs.each do |blog|%>
+
+                <!-- First Blog Post -->
+                <h3>
+                    <%= link_to "#{blog.title}", blog%>
+                </h3>
+                <p class="lead">
+                   <%= blog.subtitle%>
+                </p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on <%= blog.created_at%></p>
+                <hr>
+                <%= image_tag blog.blog_image, style: 'width: 100%;height: 400px;border-radius: 10.5px;'%>
+                <hr>
+                <p><%= sanitize(blog.body).truncate(300).html_safe %></p>
+            
+                <%= link_to 'Read More..', blog%><br/>
+
+                <p><b>Tags: </b><span><%= raw blog.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></span>
+                <%#= binding.pry%>
+                    <span style="float:right;"><b>Share: </b>
+                      <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>
+                      <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                      <i class="fa fa-google-plus-square fa-lg" aria-hidden="true"></i></span></p>
+                <hr>
+                <%end%>
+                <!-- Pager -->
+                <ul class="pager">
+                    <!-- <li class="previous">
+                        <a href="#">&larr; Older</a>
+                    </li>
+                    <li class="next">
+                        <a href="#">Newer &rarr;</a>
+                    </li> -->
+                    <%= paginate @blogs %>
+                </ul>
+
+            </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <div class="well">
+                    <h4>Recent Blogs</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="list-unstyled">
+                              <%Blog.all.each do |blog|%>
+                                <li><a href="/blogs/<%= blog.id%>"  style="color: #204621;text-decoration: none;font-size: 15px;"><%= blog.title%></a>
+                                </li>
+                              <%end%>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <div class="well">
+                  <h4>Tags</h4>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div id="tag_cloud">
+                          <% tag_cloud Blog.tag_counts, %w[s m l] do |tag, css_class| %>
+                            <ul class="list-unstyled">
+                              <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+                            </ul>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    <!-- /.container -->
+    </div>

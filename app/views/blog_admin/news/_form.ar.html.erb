@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="well bs-component">
+          <%= form_for([:blog_admin, @news]) do |form| %>
+          <fieldset>
+
+            <div class="form-group">
+              <label class="control-label">Title</label>
+                <%= form.text_field :title, class: 'form-control', placeholder: 'Title', autofocus: true%>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Subtitle</label>
+                <%= form.text_field :subtitle, class: 'form-control', placeholder: 'Subtitle', autofocus: true%>
+            </div>
+
+            <div class="form-group">
+              <label for="blog_tags" class="control-label">Tags</label>
+                <%= form.select :tag_list, options_from_collection_for_select(TagName.all.collect, :name, :name, selected: @news.tag_list), {:include_blank => "Select tags"},  {id: 'blog_tags', class: "select2", style: 'width:100%;', :required => true, multiple: true} %>
+            </div>
+
+            <a style="color: black;" href="#" data-toggle="modal" data-target="#myModal">Add Tags</a>
+
+            <div class="form-group">
+              <label class="control-label">Keywords</label>
+                <%= form.text_field :keywords, class: 'form-control', placeholder: 'Keywords', autofocus: true%>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Meta description</label>
+                <%= form.text_field :meta_description, class: 'form-control', placeholder: 'Meta description', autofocus: true%>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Source</label>
+                <%= form.text_field :source, class: 'form-control', placeholder: 'Source', autofocus: true%>
+            </div>
+            
+            <div class="form-group">
+              <label class="control-label">Image</label>
+                <%= form.file_field :news_image%>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Body</label>
+                <%= form.cktext_area :body, class: 'form-control', placeholder: 'Body', autofocus: true%>
+            </div>
+
+            <div class="form-group">
+              <%= form.button :class => "btn btn-primary", style: 'width:33%;float:right;', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>In progress...."} %>
+            </div>
+          <% end %>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add tags</h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'tag_names/form'%>
+        </div>
+      </div>
+      
+    </div>
+  </div>
